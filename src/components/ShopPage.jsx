@@ -21,12 +21,23 @@ function ShopPage() {
   const [toast, setToast] = useState(null); // { message, type }
 
   // Keep the filter in sync if someone lands here via a category link
-  // (e.g. from the homepage's Featured Categories tiles).
   useEffect(() => {
     if (categoryParam && categories.includes(categoryParam)) {
       setSelectedCategory(categoryParam);
     }
   }, [categoryParam]);
+
+  // Handle hash scrolling to the cart section (e.g. /shop#cart)
+  useEffect(() => {
+    if (window.location.hash === "#cart") {
+      const cartElement = document.getElementById("cart");
+      if (cartElement) {
+        setTimeout(() => {
+          cartElement.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, []);
 
   const filteredProducts = allProducts.filter(
     (product) => selectedCategory === "All" || product.category === selectedCategory
@@ -152,8 +163,8 @@ function ShopPage() {
         ))}
       </div>
 
-      {/* Shopping Cart */}
-      <div className="bg-white border-2 border-brand-gold rounded-2xl p-4 xs:p-5 sm:p-6 md:p-7 lg:p-8 shadow-lg mb-14 xs:mb-16 sm:mb-20">
+      {/* Shopping Cart (with id="cart" added for anchor scrolling) */}
+      <div id="cart" className="bg-white border-2 border-brand-gold rounded-2xl p-4 xs:p-5 sm:p-6 md:p-7 lg:p-8 shadow-lg mb-14 xs:mb-16 sm:mb-20 scroll-mt-32">
         <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-brand-dark mb-4 xs:mb-5 sm:mb-6">
           Shopping Cart
           {cartItems.length > 0 && (
@@ -252,7 +263,7 @@ function ShopPage() {
                   onClick={clearCart}
                   className="flex-1 bg-gray-200 text-brand-dark font-bold py-2 xs:py-3 px-4 xs:px-6 rounded-lg transition-colors duration-300 text-sm xs:text-base touch-manipulation hover:bg-gray-300"
                 >
-                  Clear Cart
+                  Clear Cart Section
                 </button>
                 <button
                   onClick={handleCheckout}
