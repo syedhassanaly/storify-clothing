@@ -115,18 +115,19 @@ function NavBar() {
               </NavLink>
             )}
 
-            <Link
-              to="/shop"
-              aria-label="View cart"
-              className={`relative p-2 rounded-full transition-colors duration-300 ${linkTextClass}`}
-            >
-              <ShoppingBag size={18} />
-              {totalCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] rounded-full h-4.5 w-4.5 flex items-center justify-center font-bold">
-                  {totalCount > 99 ? "99+" : totalCount}
-                </span>
-              )}
-            </Link>
+            {/* Replace this in your NavBar.jsx */}
+<Link
+  to="/shop#cart"
+  aria-label="View cart"
+  className={`relative p-2 rounded-full transition-colors duration-300 ${linkTextClass}`}
+>
+  <ShoppingBag size={18} />
+  {totalCount > 0 && (
+    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] rounded-full h-4.5 w-4.5 flex items-center justify-center font-bold">
+      {totalCount > 99 ? "99+" : totalCount}
+    </span>
+  )}
+</Link>
 
             <Link
               to="/shop"
